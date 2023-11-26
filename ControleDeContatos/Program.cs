@@ -12,9 +12,13 @@ namespace ControleDeContatos
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            // Baixar extenção Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
+            // Para atualizar sem ter que pausar a aplicação
+            // SUBSTITUIR: builder.Services.AddControllersWithViews(); --> Versões anteriores
+            // POR: builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); --> Versões atuais
             builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
-            // Conex�o com o Banco
+            // Conexão com o Banco
             builder.Services.AddDbContext<BancoContext>
                 (options => options.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
 
@@ -47,7 +51,7 @@ namespace ControleDeContatos
 
             app.UseSession();
 
-            //Rota padr�o
+            //Rota padrão
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Login}/{action=Index}/{id?}");
@@ -63,14 +67,14 @@ namespace ControleDeContatos
     ->Comando para criar Migration de Contatos:
     Add-Migration  CriandoTabelaContatos -Context BancoContext
 
-    ->Comando para criar Migration de Usu�rios:
+    ->Comando para criar Migration de Usuários:
     Add-Migration  CriandoTabelaContatos -Context BancoContext
 
-    ->Comando para atualizar o banco, criando as tabelas atrav�s das Migrations:
+    ->Comando para atualizar o banco, criando as tabelas através das Migrations:
     Update-Database -Context BancoContext
 
     ----------------------------------------------------------------------------------------
-    ->Comando que criou a Migration de relacionamento OneToMany entre Usu�rios1 -- *Contatos:
+    ->Comando que criou a Migration de relacionamento OneToMany entre Usuários1 -- *Contatos:
     Add-Migration CriandoVinculoUsuarioNaContato -Context BancoContext
 
     ->Comando para atualizar as tabela do banco com o relacionamento OneToMany:
