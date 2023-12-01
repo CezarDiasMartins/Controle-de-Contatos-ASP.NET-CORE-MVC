@@ -12,7 +12,7 @@ namespace ControleDeContatos.Data
         public DbSet<ContatoModel> Contatos { get; set; }
         public DbSet<UsuarioModel> Usuarios { get; set; }
 
-        // Relação do Banco com o Relacionamento OneToMany
+        // Mapeamento de comoa classe Contato se comportará dentro do Banco de Dados
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ContatoMap());
